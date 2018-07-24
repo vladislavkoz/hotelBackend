@@ -5,8 +5,9 @@ class ReservationsController  {
         return Apartments.find()
     }
 
-    create (reservation) {
-        return Apartments.create(reservation)
+    create (apartment) {
+        console.log(JSON.stringify(apartment));
+        return Apartments.create(apartment)
     }
 
     removeById(id){

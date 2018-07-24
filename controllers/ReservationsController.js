@@ -4,13 +4,11 @@ class ReservationsController  {
     find() {
         return Reservations.find()
     }
-
+    findBy(filters){
+        return Reservations.find(filters);
+    }
     create (reservation) {
         return Reservations.create(reservation)
-    }
-
-    findById(id){
-        return Reservations.findById(id);
     }
 
     removeById(id){

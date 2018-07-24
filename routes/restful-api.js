@@ -5,7 +5,7 @@ function restfulRouter (controller){
     const router = express.Router();
 
     router.patch('/:id',async  function (req,res){
-        controller.updateById(req.params.id,req.body,{new:true})
+        controller.updateById(req.params.id,req.body)
             .then(m => res.json(m))
             .catch(err => res.status(500).json({error:err}))
     });
@@ -17,21 +17,22 @@ function restfulRouter (controller){
     });
 
     router.post('/', function (req, res) {
-        controller.create(req.body.reservation)
+        controller.create(req.body.entity)
             .then(d => res.json(d))
             .catch(err => res.status(500).json({error: err}))
     });
 
-
-    // router.get('/:id', function (req, res) {
-    //     controller.findById(req.params.id)
-    //         .then(m => res.json(m))
-    //         .catch(err => res.status(500).json({error: err}))
-    // });
-
     router.get('/', function (req, res) {
-        controller.find()
+            controller.find()
+                .sort({checkInDate: 'asc'})
             .then(models => res.json(models))
+            .catch(err => res.status(500).json({error: err}))
+    });
+
+    router.get('/by/',function(req,res){
+        controller.findBy(req.query)
+            .sort({checkInDate: 'asc'})
+            .then(m => res.json(m))
             .catch(err => res.status(500).json({error: err}))
     });
 
