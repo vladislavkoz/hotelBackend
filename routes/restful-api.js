@@ -17,6 +17,7 @@ function restfulRouter (controller){
     });
 
     router.post('/', function (req, res) {
+        console.log(req.body.entity);
         controller.create(req.body.entity)
             .then(d => res.json(d))
             .catch(err => res.status(500).json({error: err}))
@@ -29,9 +30,9 @@ function restfulRouter (controller){
             .catch(err => res.status(500).json({error: err}))
     });
 
-    router.get('/by/',function(req,res){
+     router.get('/by/',function(req,res){
         controller.findBy(req.query)
-            .sort({checkInDate: 'asc'})
+            // .then(m => console.log(m))
             .then(m => res.json(m))
             .catch(err => res.status(500).json({error: err}))
     });

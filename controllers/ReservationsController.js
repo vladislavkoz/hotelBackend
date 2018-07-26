@@ -4,9 +4,11 @@ class ReservationsController  {
     find() {
         return Reservations.find()
     }
+
     findBy(filters){
-        return Reservations.find(filters);
+        return Reservations.find(filters).sort({checkInDate: 'asc'});
     }
+
     create (reservation) {
         return Reservations.create(reservation)
     }
